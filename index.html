@@ -355,6 +355,38 @@ input::placeholder{ color:#5E594F; }
 .copy-btn.done{ border-color:#7BC79B; background:rgba(90,190,130,.14); color:#B8F0CF; }
 #pay-depositor.need{ border-color:#D0695B; box-shadow:0 0 0 3px rgba(208,105,91,.2); }
 
+/* 오픈채팅 확인 요청 · 확인 코드 */
+.step-head{ display:flex; align-items:center; gap:7px; margin:0 0 9px; }
+.step-no{ display:grid; place-items:center; width:17px; height:17px; border-radius:50%; flex:none;
+  font-size:10px; font-weight:700; color:#1A1408; background:linear-gradient(120deg,#EBD68F,#C9A227); }
+.step-head b{ font-size:12.5px; color:#F0E2B4; font-weight:600; letter-spacing:.01em; }
+.chat-btn{ background:linear-gradient(120deg,#FEE500,#F3D400); color:#191600; font-family:var(--sans);
+  font-size:14.5px; padding:14px; box-shadow:0 8px 20px rgba(240,214,0,.16), inset 0 1px 0 rgba(255,255,255,.5); }
+.chat-btn:hover{ filter:brightness(1.03); }
+.chat-note{ margin-top:7px; text-align:center; }
+.code-sep{ position:relative; height:1px; margin:18px 0 13px; background:rgba(212,175,55,.2); }
+.code-sep span{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); padding:0 10px;
+  background:#0F1219; font-size:10px; letter-spacing:.18em; color:#8E8778; white-space:nowrap; }
+.code-box{ border:1px solid rgba(212,175,55,.3); border-radius:16px; padding:13px 14px 14px;
+  background:linear-gradient(180deg,rgba(212,175,55,.09),rgba(8,9,13,.4)); }
+.cb-sub{ margin:0 0 10px; font-size:11.5px; color:#A69E8C; line-height:1.6; }
+#pay-code{ text-align:center; font-family:var(--serif); font-size:19px; letter-spacing:.22em; padding:12px 10px; }
+#pay-code::placeholder{ font-family:var(--sans); font-size:12.5px; letter-spacing:0; }
+#pay-code.need{ border-color:#D0695B; box-shadow:0 0 0 3px rgba(208,105,91,.2); }
+.code-go{ margin-top:9px; font-size:14px; padding:13px; }
+.code-err{ margin:9px 0 0; font-size:11.5px; line-height:1.55; color:#EFAF9F; text-align:center; }
+
+/* 관리자 · 입금 확인 코드 카드 */
+.code-card .cd-row{ display:flex; align-items:center; gap:8px; padding:9px 11px; border-radius:12px; margin-bottom:7px;
+  border:1px solid rgba(212,175,55,.18); background:rgba(255,255,255,.02); }
+.code-card .cd-row .cl{ flex:1; font-size:12px; color:#CFC7B4; }
+.code-card .cd-row .cv{ font-family:var(--serif); font-size:16px; letter-spacing:.1em; color:#FFE9AF; }
+.code-card .cd-chat{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding:10px 11px; border-radius:12px;
+  border:1px dashed rgba(212,175,55,.32); background:rgba(212,175,55,.05); }
+.code-card .cd-chat .cl{ font-size:11.5px; color:#CFC7B4; }
+.code-card .cd-chat a{ flex:1; min-width:0; font-size:11px; color:#E4CE92; text-decoration:none; word-break:break-all; }
+.code-card .mini-btn.done{ border-color:#7BC79B; background:rgba(90,190,130,.14); color:#B8F0CF; }
+
 /* 관리자 · 입금 상태 */
 .pchip{ font-size:9.5px; padding:1px 6px; border-radius:999px; border:1px solid rgba(255,255,255,.14); color:#A69E8C; }
 .pchip.bank{ border-color:rgba(212,175,55,.4); background:rgba(212,175,55,.09); color:#E4CE92; }
@@ -630,10 +662,10 @@ body{ word-break:keep-all; overflow-wrap:break-word; }
   <!-- ══════════ 결제 모달 (계좌이체 · 무통장 입금) ══════════ -->
   <div class="sheet-wrap" id="paywall" aria-hidden="true">
     <div class="sheet-bd" data-close></div>
-    <div class="sheet" role="dialog" aria-modal="true" aria-label="계좌이체 입금 안내">
+    <div class="sheet" role="dialog" aria-modal="true" aria-label="계좌이체 입금 · 오픈채팅 확인 코드">
       <div class="grip"></div>
       <h3>계좌이체로 풀이 열기</h3>
-      <p class="sub">아래 계좌로 입금하시고, 입금자명을 남겨 주세요. 확인 후 풀이가 열립니다.</p>
+      <p class="sub">아래 계좌로 입금하시고 오픈채팅으로 입금 확인을 요청해 주세요. 확인 후 보내드리는 코드를 입력하면 풀이가 열립니다.</p>
       <div class="tier-picks" id="pay-tiers">
         <button type="button" data-t="single"><b>단품 1종</b><span>4,900원</span></button>
         <button type="button" data-t="pkg"><b>핵심 3종</b><span>9,900원</span></button>
@@ -655,13 +687,25 @@ body{ word-break:keep-all; overflow-wrap:break-word; }
         </div>
         <button class="copy-btn" type="button" id="btn-copy-acct">계좌번호 복사</button>
       </div>
-      <label class="field" style="margin-bottom:12px">
+      <div class="step-head"><span class="step-no">1</span><b>입금 확인 요청</b></div>
+      <label class="field" style="margin-bottom:10px">
         <span class="label">입금자명 <em>실제 입금하신 이름</em></span>
         <input type="text" id="pay-depositor" maxlength="20" placeholder="예) 김명수" autocomplete="name">
         <p class="hint" id="pay-depositor-hint">은행 이체에 표시된 입금자명을 적어 주세요. 이름이 달라도 확인할 수 있게요.</p>
       </label>
-      <button class="btn-primary" type="button" id="pay-go">입금 완료했어요 · 상세 풀이 보기</button>
-      <p class="fine" style="text-align:center">계좌이체(무통장 입금) 안내 · 입금자명 확인 후 열람</p>
+      <button class="btn-primary chat-btn" type="button" id="pay-chat">💬 오픈채팅으로 입금 확인 요청하기</button>
+      <p class="hint chat-note">입금자명과 상품이 담긴 요청 양식을 복사해 드려요. 오픈채팅에 붙여넣기만 하시면 돼요.</p>
+
+      <div class="code-sep"><span>확인 코드 입력</span></div>
+
+      <div class="code-box">
+        <div class="step-head"><span class="step-no">2</span><b>확인 코드 입력</b></div>
+        <p class="cb-sub">오픈채팅에서 받으신 확인 코드를 입력하면 바로 열립니다.</p>
+        <input type="text" id="pay-code" inputmode="numeric" autocomplete="one-time-code" maxlength="12" placeholder="확인 코드 입력 (예: 4자리~6자리)" aria-label="확인 코드">
+        <button class="btn-primary code-go" type="button" id="pay-code-go">코드 확인하고 풀이 열기</button>
+        <p class="code-err" id="pay-code-err" hidden></p>
+      </div>
+      <p class="fine" style="text-align:center">계좌이체(무통장 입금) 안내 · 입금 확인 후 오픈채팅으로 확인 코드 전달</p>
     </div>
   </div>
 
@@ -3081,7 +3125,7 @@ function renderResult() {
           <span class="tx"><b class="cta-tx">10대 운세 평생 소장 패스</b><small>궁합 포함 열 가지 전부 · 1건당 1,990원 꼴</small></span>
           <span class="pr">19,900원</span>
         </button>
-        <p class="pay-note">한 번 열면 계속 보실 수 있어요 · 계좌이체(무통장 입금) 안내 · 입금자명 확인 후 열람</p>
+        <p class="pay-note">한 번 열면 계속 보실 수 있어요 · 계좌이체(무통장 입금) · 오픈채팅 입금 확인 후 확인 코드로 열람</p>
       </div>
     </div>`;
   }
@@ -3178,8 +3222,13 @@ function partnerAskCard() {
 
 /* ── 결제 (계좌이체 · 무통장 입금) ─────────────────────── */
 const BANK = { bank: '농협', account: '485810-52-120791', owner: '임재대' };
-const PAY_CTA = '입금 완료했어요 · 상세 풀이 보기';
+const OPEN_CHAT = { url: 'https://open.kakao.com/o/gwnQFzXi', label: 'https://open.kakao.com/o/gwnQFzXi' };
 const DEPOSIT_STATUS = { pending: '입금 확인 대기', confirmed: '입금 확인 완료' };
+/* 확인 코드 — 입금 확인 후 오픈채팅으로 전달하는 등급별 코드 */
+const UNLOCK_CODES = { '8401': 'single', '8403': 'pkg', '8410': 'pass' };
+const CODE_ERR = '확인 코드가 맞지 않아요. 오픈채팅으로 다시 확인해 주세요.';
+const TIER_KO = { single: '단품', pkg: '핵심 3종 패키지', pass: '10종 패스' };
+function normCode(v) { return String(v || '').replace(/\s+/g, '').toUpperCase(); }
 function payLabels(kind) {
   const t = Con.THEMES[state.theme];
   const pkgNames = Con.packageThemes(state.theme, state.purchases).map(k => Con.THEMES[k].name).join('·');
@@ -3198,8 +3247,6 @@ function paintPaywall(kind) {
     if (b.dataset.t === 'pkg') b.style.display = pkgAvailable ? '' : 'none';
     b.classList.toggle('on', b.dataset.t === kind);
   });
-  const go = $('#pay-go');
-  if (go && !go.dataset.busy) go.textContent = PAY_CTA;
 }
 function openPaywall(kind, themeKey) {
   if (themeKey) state.theme = themeKey;
@@ -3213,6 +3260,9 @@ function openPaywall(kind, themeKey) {
       ? '사주에 적으신 이름으로 채워 두었어요. 실제 입금자명과 다르면 고쳐 주세요.'
       : '은행 이체에 표시된 입금자명을 적어 주세요. 이름이 달라도 확인할 수 있게요.';
   }
+  const cErr = $('#pay-code-err');
+  if (cErr) { cErr.hidden = true; cErr.textContent = ''; }
+  if (dep) dep.classList.remove('need');
   const sheet = $('#paywall');
   sheet.classList.add('on'); sheet.setAttribute('aria-hidden', 'false');
 }
@@ -3220,9 +3270,31 @@ function closePaywall() {
   const sheet = $('#paywall');
   sheet.classList.remove('on'); sheet.setAttribute('aria-hidden', 'true');
 }
+function legacyCopyText(text) {
+  let ok = false;
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none';
+    document.body.appendChild(ta);
+    ta.select(); ta.setSelectionRange(0, text.length);
+    ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+  } catch (e) { ok = false; }
+  return ok;
+}
+function writeClipboard(text) {
+  return new Promise(resolve => {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => resolve(true), () => resolve(legacyCopyText(text)));
+      } else resolve(legacyCopyText(text));
+    } catch (e) { resolve(legacyCopyText(text)); }
+  });
+}
 function copyAccount() {
   const text = `${BANK.bank} ${BANK.account}`;
-  const done = ok => {
+  writeClipboard(text).then(ok => {
     if (ok) {
       toast(`계좌번호를 복사했어요 · ${text}`);
       const b = $('#btn-copy-acct');
@@ -3231,41 +3303,117 @@ function copyAccount() {
     } else {
       toast('복사가 안 되면 계좌번호를 길게 눌러 직접 복사해 주세요.', 3000);
     }
-  };
-  const legacy = () => {
-    let ok = false;
-    try {
-      const ta = document.createElement('textarea');
-      ta.value = text; ta.setAttribute('readonly', '');
-      ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none';
-      document.body.appendChild(ta);
-      ta.select(); ta.setSelectionRange(0, text.length);
-      ok = document.execCommand('copy');
-      document.body.removeChild(ta);
-    } catch (e) { ok = false; }
-    done(ok);
-  };
-  // file:// · 구형 브라우저에서도 되도록 clipboard API → execCommand 순서로 시도
-  try {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(() => done(true), legacy);
-    } else legacy();
-  } catch (e) { legacy(); }
+  });
 }
 function recordDeposit(kind, amount, depositor, label) {
   const at = Date.now();
+  if (!Array.isArray(store.payments)) store.payments = [];
+  const v = store.visitors.find(x => x.id === state.visitorId);
+  // 같은 손님이 같은 상품으로 다시 요청하면 최근 대기 건을 갱신한다(중복 기록 방지)
+  const recent = store.payments.find(p => p.status === 'pending' && p.kind === kind && (at - p.at) < 30 * 60000 &&
+    (p.visitorId === state.visitorId || (depositor && p.depositor === depositor)));
+  if (recent) {
+    recent.at = at; recent.depositor = depositor; recent.label = label; recent.amount = amount;
+    recent.name = (state.input && state.input.name) || depositor;
+  } else {
+    store.payments.unshift({
+      id: newId('p'), at, visitorId: state.visitorId || '',
+      name: (state.input && state.input.name) || depositor, depositor,
+      kind, label, amount, method: '계좌이체', status: 'pending'
+    });
+    if (v) v.paid = (v.paid || 0) + amount;
+  }
+  if (v) { v.paidAt = at; v.depositor = depositor; v.payMethod = '계좌이체'; v.payStatus = 'pending'; }
+  saveStore();
+}
+/* 확인 코드로 잠금 해제 — 등급은 코드가 정한다(단품/3종/10종) */
+function confirmByCode(kind, amount, depositor, label, code) {
+  const at = Date.now();
+  if (!Array.isArray(store.payments)) store.payments = [];
+  const pending = store.payments
+    .filter(x => x.status === 'pending' && (x.visitorId === state.visitorId || (depositor && x.depositor === depositor)))
+    .sort((a, b) => b.at - a.at)[0];
+  let added = 0;
+  if (pending) {
+    pending.status = 'confirmed'; pending.confirmedAt = at; pending.kind = kind; pending.amount = amount;
+    pending.label = label; pending.code = code; pending.depositor = depositor;
+    pending.name = pending.name || (state.input && state.input.name) || depositor;
+  } else {
+    store.payments.unshift({
+      id: newId('p'), at, visitorId: state.visitorId || '',
+      name: (state.input && state.input.name) || depositor, depositor,
+      kind, label, amount, method: '계좌이체', status: 'confirmed', confirmedAt: at, code
+    });
+    added = amount;
+  }
   const v = store.visitors.find(x => x.id === state.visitorId);
   if (v) {
-    v.paid = (v.paid || 0) + amount; v.paidAt = at;
-    v.depositor = depositor; v.payMethod = '계좌이체'; v.payStatus = 'pending';
+    if (added) v.paid = (v.paid || 0) + added;
+    v.depositor = depositor || v.depositor; v.payMethod = '계좌이체'; v.payStatus = 'confirmed';
+    v.paidAt = v.paidAt || at;
   }
-  if (!Array.isArray(store.payments)) store.payments = [];
-  store.payments.unshift({
-    id: newId('p'), at, visitorId: state.visitorId || '',
-    name: (state.input && state.input.name) || depositor, depositor,
-    kind, label, amount, method: '계좌이체', status: 'pending'
-  });
   saveStore();
+}
+function requestDeposit() {
+  const depEl = $('#pay-depositor');
+  const depositor = ((depEl && depEl.value) || '').trim();
+  if (!depositor) {
+    if (depEl) { depEl.focus(); depEl.classList.add('need'); setTimeout(() => depEl.classList.remove('need'), 1800); }
+    toast('입금자명을 먼저 적어 주세요 · 실제 입금하신 이름이에요.', 2800);
+    return;
+  }
+  const kind = state.pendingProduct || 'single';
+  const L = payLabels(kind);
+  const text = `천명록 입금 확인 요청합니다\n입금자명: ${depositor}\n상품: ${L.name} (${won(L.amount)})`;
+  let w = null;
+  try { w = window.open(OPEN_CHAT.url, '_blank'); } catch (e) { w = null; }
+  if (w) { try { w.opener = null; } catch (e) {} }
+  state.depositor = depositor;
+  recordDeposit(kind, L.amount, depositor, L.name);
+  writeClipboard(text).then(ok => {
+    const tail = w ? '' : ` · 오픈채팅이 안 열리면 ${OPEN_CHAT.url}`;
+    if (ok) toast('요청 양식을 복사했어요! 오픈채팅에 바로 붙여넣어 주세요' + tail, 4600);
+    else toast('붙여넣을 양식: ' + text.replace(/\n/g, ' / ') + tail, 6500);
+  });
+}
+function verifyCode() {
+  const el = $('#pay-code');
+  const err = $('#pay-code-err');
+  const raw = normCode(el ? el.value : '');
+  const kind = UNLOCK_CODES[raw];
+  if (!kind) {
+    if (err) { err.textContent = CODE_ERR; err.hidden = false; }
+    if (el) {
+      el.classList.add('need'); el.focus();
+      try { el.select(); } catch (e) {}
+      setTimeout(() => el.classList.remove('need'), 1800);
+    }
+    toast(CODE_ERR, 3000);
+    return;
+  }
+  if (err) { err.hidden = true; err.textContent = ''; }
+  const amount = PRICE[kind] || PRICE.single;
+  const depEl = $('#pay-depositor');
+  const depositor = ((depEl && depEl.value) || state.depositor || (state.input && state.input.name) || '').trim();
+  let label;
+  if (kind === 'pass') {
+    state.pass = true;
+    label = '10대 운세 평생 소장 패스';
+  } else if (kind === 'pkg') {
+    const ks = Con.packageThemes(state.theme, state.purchases).slice(0, 3);
+    state.pkg = ks;
+    ks.forEach(k => { if (!state.purchases[k]) state.purchases[k] = amount; });
+    label = '핵심 3종 패키지 · ' + ks.map(k => Con.THEMES[k].name).join('·');
+  } else {
+    state.purchases[state.theme] = amount;
+    label = Con.THEMES[state.theme].name + ' 단품 풀이 열람';
+  }
+  if (depositor) state.depositor = depositor;
+  confirmByCode(kind, amount, depositor, label, raw);
+  if (el) el.value = '';
+  closePaywall();
+  renderResult();
+  toast(`확인 코드 확인 완료 · ${TIER_KO[kind]} 풀이를 열었어요`, 3600);
 }
 function bindPayment() {
   $$('[data-close]').forEach(el => el.onclick = closePaywall);
@@ -3274,41 +3422,20 @@ function bindPayment() {
   if (dep) {
     dep.addEventListener('input', () => { state.depositor = dep.value; });
     dep.addEventListener('keydown', e => {
-      if (e.key === 'Enter') { e.preventDefault(); $('#pay-go').click(); }
+      if (e.key === 'Enter') { e.preventDefault(); requestDeposit(); }
     });
   }
   const cp = $('#btn-copy-acct');
   if (cp) cp.onclick = copyAccount;
-  $('#pay-go').onclick = () => {
-    const btn = $('#pay-go');
-    if (btn.dataset.busy) return;
-    const depEl = $('#pay-depositor');
-    const depositor = (depEl ? depEl.value : '').trim();
-    if (!depositor) {
-      if (depEl) { depEl.focus(); depEl.classList.add('need'); setTimeout(() => depEl.classList.remove('need'), 1800); }
-      toast('입금자명을 먼저 적어 주세요 · 실제 입금하신 이름이에요.', 2800);
-      return;
-    }
-    const kind = state.pendingProduct;
-    const amount = PRICE[kind] || PRICE.single;
-    btn.dataset.busy = '1'; btn.textContent = '입금 확인 중…';
-    setTimeout(() => {
-      let label = Con.THEMES[state.theme].name + ' 단품 풀이 열람';
-      if (kind === 'pass') { state.pass = true; label = '10대 운세 평생 소장 패스'; }
-      else if (kind === 'pkg') {
-        const ks = Con.packageThemes(state.theme, state.purchases);
-        state.pkg = ks;
-        ks.forEach(k => state.purchases[k] = amount);
-        label = '핵심 3종 패키지 · ' + ks.map(k => Con.THEMES[k].name).join('·');
-      } else state.purchases[state.theme] = amount;
-      recordDeposit(kind, amount, depositor, label);
-      state.depositor = depositor;
-      btn.dataset.busy = ''; btn.textContent = PAY_CTA;
-      closePaywall();
-      renderResult();
-      toast('입금 요청이 접수되었습니다. (실제 운영 시 관리자 입금 확인 후 열람 연결)', 4200);
-    }, 900);
-  };
+  const chat = $('#pay-chat');
+  if (chat) chat.onclick = requestDeposit;
+  const cgo = $('#pay-code-go');
+  if (cgo) cgo.onclick = verifyCode;
+  const codeEl = $('#pay-code');
+  if (codeEl) {
+    codeEl.addEventListener('input', () => { const e2 = $('#pay-code-err'); if (e2) e2.hidden = true; });
+    codeEl.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); verifyCode(); } });
+  }
 }
 
 function bindPartnerSheet() {
@@ -3376,9 +3503,10 @@ function renderAdmin() {
       <div class="p2">
         <span>${p.label || '풀이 열람'}</span>
         <span>사주 이름 ${esc(p.name || '—')}</span>
+        ${p.code ? `<span>확인 코드 ${esc(p.code)}</span>` : ''}
         <span>${new Date(p.at).toLocaleString('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</span>
       </div>
-      ${st === 'pending' ? `<button class="mini-btn wide" type="button" data-confirm="${p.id}">입금 확인 완료 처리</button>` : ''}
+      ${st === 'pending' ? `<button class="mini-btn wide" type="button" data-confirm="${p.id}">입금 확인 처리 (확인 코드 전달)</button>` : ''}
     </div>`;
   }).join('');
 
@@ -3389,8 +3517,30 @@ function renderAdmin() {
       <div class="f">${new Date(l.at).toLocaleString('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })} · 수신 ${l.count}명 · ${l.url || ''}</div>
     </div>`).join('') || '<p class="adm-note">아직 보낸 이력이 없어요.</p>';
 
+  const codeRows = [
+    ['단품 4,900원', '8401'], ['핵심 3종 9,900원', '8403'], ['10종 패스 19,900원', '8410']
+  ].map(([nm, code]) => `
+      <div class="cd-row"><span class="cl">${nm}</span><span class="cv">${code}</span>
+        <button class="mini-btn" type="button" data-cc="${code}" data-lb="${nm}">복사</button></div>`).join('');
+  const codeCard = `
+    <div class="card code-card" style="margin:16px 0 12px">
+      <div class="card-head" style="margin-bottom:10px">
+        <span class="eyebrow">DEPOSIT CODE</span>
+        <h2>🔑 입금 확인 코드 안내 (복사용)</h2>
+        <p>입금을 확인한 손님에게 이 코드를 오픈채팅으로 알려 주세요. 손님이 결제창의 <b>확인 코드 입력</b>에 넣으면 그 등급이 열립니다.</p>
+      </div>
+      ${codeRows}
+      <div class="cd-chat">
+        <span class="cl">💬 오픈채팅</span>
+        <a href="${OPEN_CHAT.url}" target="_blank" rel="noopener">${OPEN_CHAT.label}</a>
+        <button class="mini-btn" type="button" data-cc="chat">링크 복사</button>
+      </div>
+      <p class="fine" style="margin-top:9px">단품 코드는 지금 보고 있는 테마만, 3종 코드는 핵심 3종, 10종 코드는 어느 창에서든 열 가지 전부가 열립니다.</p>
+    </div>`;
+
   $('#admin-body').innerHTML = `
   <div class="admin">
+    ${codeCard}
     <div class="card" style="margin:16px 0 12px">
       <div class="card-head" style="margin-bottom:12px">
         <span class="eyebrow">DASHBOARD</span>
@@ -3403,7 +3553,7 @@ function renderAdmin() {
         <div class="c"><div class="v">${consentCount}</div><div class="k">알림 동의</div></div>
       </div>
       <div style="font-size:11px;color:#6B665C">누적 결제액 ${won(paidSum)} · 회원 ${store.visitors.length}명 · 단품 ${tierCount.single} / 3종 패키지 ${tierCount.pkg} / 10종 패스 ${tierCount.pass}</div>
-      <div style="font-size:11px;color:${pendingCount ? '#D9A24A' : '#6B665C'};margin-top:4px">계좌이체 입금 확인 대기 ${pendingCount}건 · 입금자명 확인 후 열람 처리</div>
+      <div style="font-size:11px;color:${pendingCount ? '#D9A24A' : '#6B665C'};margin-top:4px">계좌이체 입금 확인 대기 ${pendingCount}건 · 확인 후 오픈채팅으로 확인 코드 전달</div>
     </div>
 
     <div class="card" style="margin:0 0 12px">
@@ -3426,6 +3576,7 @@ function renderAdmin() {
         <span class="eyebrow">PAYMENTS</span><h2>결제 기록 · 계좌이체</h2>
         <p>입금 계좌 ${BANK.bank} ${BANK.account} · 예금주 ${BANK.owner}</p>
         <p style="margin-top:3px">입금자명과 확인 상태를 여기서 관리해요 · 대기 ${pendingCount}건</p>
+        <p style="margin-top:3px;color:#D9A24A">입금을 확인했으면 손님에게 그 등급의 확인 코드를 오픈채팅으로 알려 주세요.</p>
       </div>
       ${payRows || '<p class="adm-note">아직 입금 기록이 없어요.</p>'}
     </div>
@@ -3475,6 +3626,22 @@ function renderAdmin() {
     toast('샘플 데이터로 초기화했어요.');
   };
   $$('[data-confirm]').forEach(b => b.onclick = () => confirmDeposit(b.dataset.confirm));
+  $$('[data-cc]').forEach(b => b.onclick = () => copyAdminCode(b));
+}
+
+function copyAdminCode(btn) {
+  const v = btn.dataset.cc;
+  const text = v === 'chat' ? OPEN_CHAT.url : v;
+  writeClipboard(text).then(ok => {
+    if (ok) {
+      const old = btn.textContent;
+      btn.textContent = '복사 완료 ✓'; btn.classList.add('done');
+      setTimeout(() => { btn.textContent = old; btn.classList.remove('done'); }, 1600);
+      toast(v === 'chat' ? '오픈채팅 링크를 복사했어요' : `확인 코드 ${v}를 복사했어요 · ${btn.dataset.lb || ''}`, 2600);
+    } else {
+      toast('복사가 안 되면 코드를 길게 눌러 직접 복사해 주세요.', 3000);
+    }
+  });
 }
 
 function confirmDeposit(id) {
@@ -3484,7 +3651,7 @@ function confirmDeposit(id) {
   const v = store.visitors.find(x => x.id === p.visitorId) || store.visitors.find(x => x.name === p.name);
   if (v) { v.payStatus = 'confirmed'; if (!v.depositor) v.depositor = p.depositor; }
   saveStore(); renderAdmin();
-  toast(`${p.depositor} 님 입금을 확인했어요 · [입금 확인 완료]`, 3000);
+  toast(`${p.depositor} 님 입금을 확인했어요 · 확인 코드를 오픈채팅으로 알려 주세요`, 3600);
 }
 
 /* ── 부트 ───────────────────────────────────────────────── */
