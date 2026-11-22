@@ -676,8 +676,23 @@ table.rt td:first-child{font-weight:600;color:var(--ink-1);white-space:nowrap}
 .tcard::after{content:'';position:absolute;right:0;top:14px;bottom:14px;width:1px;
   background:linear-gradient(180deg,transparent,rgba(212,175,106,.22),transparent)}
 .tcard:active{transform:translateY(1px);border-color:rgba(212,175,106,.5)}
-.tcard.all{background:linear-gradient(150deg,#26200F,#14110A 80%);border-color:rgba(212,175,106,.46);
-  box-shadow:0 16px 34px rgba(0,0,0,.4),inset 0 1px 0 rgba(235,211,162,.10)}
+/* ★ 10종 전체 추천 카드 — 이중 금박 테두리 + 금빛 글로우 (일반 카드와 확실히 구분) */
+.tcard.all{
+  background:
+    radial-gradient(130% 100% at 0% 0%,rgba(212,175,106,.17),rgba(212,175,106,.03) 58%,transparent 78%),
+    linear-gradient(150deg,#2C2411 0%,#1C1709 52%,#100D06 100%);
+  border:2px solid #D4AF6A;
+  outline:1px solid rgba(212,175,106,.45);
+  outline-offset:-6px;
+  box-shadow:
+    0 0 22px rgba(212,175,106,.25),
+    0 18px 38px rgba(0,0,0,.46),
+    inset 0 1px 0 rgba(255,232,178,.20),
+    inset 0 0 34px rgba(212,175,106,.08);
+  padding:13px 12px 13px 13px}
+.tcard.all::after{display:none}
+.tcard.all:active{transform:translateY(1px);border-color:#F1D79E}
+.tcard.all .tc-avatar img{border-color:rgba(235,211,162,.72)}
 .tc-avatar{position:relative;flex:0 0 56px;width:56px;height:56px;border-radius:16px;overflow:visible}
 .tc-avatar img{display:block;width:56px;height:56px;border-radius:16px;object-fit:cover;
   border:1px solid rgba(212,175,106,.42);box-shadow:0 6px 16px rgba(0,0,0,.45)}
@@ -693,6 +708,10 @@ table.rt td:first-child{font-weight:600;color:var(--ink-1);white-space:nowrap}
 .tc-han{font-family:var(--serif);font-size:10.5px;color:var(--on-4);letter-spacing:.04em}
 .tc-badge{font-size:9.5px;font-weight:700;letter-spacing:.06em;color:#20180A;padding:2px 7px;border-radius:20px;
   background:linear-gradient(180deg,#F3E2BC,#D4AF6A)}
+.tcard.all .tc-badge{font-size:10px;letter-spacing:.03em;color:#241A05;padding:2.5px 8px;
+  background:linear-gradient(180deg,#FFF6DC,#F5DA9B 46%,#D9B468 100%);
+  border:1px solid rgba(255,244,208,.85);
+  box-shadow:0 0 10px rgba(245,218,155,.55),0 1px 3px rgba(0,0,0,.45)}
 .tc-q{display:block;font-family:var(--serif);font-size:17px;line-height:1.42;color:var(--on-1);
   margin-top:4px;font-weight:600;letter-spacing:-.005em}
 .tcard.all .tc-q{color:var(--gold-l)}
@@ -4476,7 +4495,7 @@ window.CHAR_IMG = {"yeonhal": "data:image/webp;base64,UklGRnYTAABXRUJQVlA4IGoTAA
     return `<button type="button" class="tcard${item.key === 'all' ? ' all' : ''}" data-k="${item.key}">
       <span class="tc-avatar">${c.img ? `<img src="${c.img}" alt="${c.short}" loading="lazy" decoding="async">` : `<span class="av-fb">${c.emoji}</span>`}<span class="tc-emoji">${t.icon}</span></span>
       <span class="tc-tx">
-        <span class="tc-top"><span class="tc-name">${t.name}</span>${t.han ? `<span class="tc-han">${t.han}</span>` : ''}${item.key === 'all' ? '<span class="tc-badge">추천</span>' : ''}</span>
+        <span class="tc-top"><span class="tc-name">${t.name}</span>${t.han ? `<span class="tc-han">${t.han}</span>` : ''}${item.key === 'all' ? '<span class="tc-badge">★ 인기 추천</span>' : ''}</span>
         <span class="tc-q">${item.q}</span>
         <span class="tc-sub">${item.sub}</span>
         <span class="tc-who"><b>${c.short}</b> · “${THEME_LINE[item.key] || ''}”</span>
