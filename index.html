@@ -3334,7 +3334,7 @@ const C8 = (() => {
     out.push({
       key: 'yeonhae', book: '연해자평', han: '淵海子平', easy: '내 중심 · 뼈대',
       keyword: '내 중심이 서 있는지 봅니다', q: '내 중심은 얼마나 단단할까?', color: '#D4AF6A',
-      lead: `${stem.ko}(${a.stemHan})로 태어나 ${rootKo}. 그래서 ${rootLine}예요.`,
+      lead: `${stem.ko}(${a.stemHan})로 태어나 ${rootKo}. 그래서 ${rootLine}${J(rootLine, '이에요', '예요')}.`,
       body: [
         '옛 책은 사람을 볼 때 “중심이 서 있는가”를 가장 먼저 봤어요. 나무로 치면 뿌리가 있느냐를 보는 거예요.',
         '중심이 선 사람은 유행이 바뀌어도 자기 할 일을 계속합니다. 지금 시대에 가장 비싼 능력이 그거예요.'
@@ -4352,7 +4352,7 @@ const C8 = (() => {
     return `<div class="pc-opts">
       <button class="pc-opt" type="button" data-p="single">
         <span class="po-ico">${Con.THEMES[state.focus].icon}</span>
-        <span class="po-tx"><b>${compact ? '이 운세만' : Con.THEMES[state.focus].name + ' 단품'} 열기</b><small>${Con.THEMES[state.focus].name} 상세 · 바로 열람</small></span>
+        <span class="po-tx"><b>${compact ? '이 운세만' : Con.THEMES[state.focus].name + ' 한 가지'} 열기</b><small>${Con.THEMES[state.focus].name} 풀이 · 바로 열람</small></span>
         <span class="po-pr">4,900원</span>
       </button>
       <button class="pc-opt" type="button" data-p="pkg">
