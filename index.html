@@ -1285,10 +1285,10 @@ table.rt td:first-child{font-weight:600;color:var(--ink-1);white-space:nowrap}
 /* ══════════════════════════════════════════════════════════════════
    v10.2 — 히어로 4인 초상 확대 · 제목/부제 비율 조정 (2026-11-23)
    · 초상 4개 합계 = 3.24 × 기준크기(겹침 16.5%씩) → 360~430px 폭을 가로로 채움
-   · 452px 앱 카드에서는 124px 에서 상한 (데스크톱 과대 방지)
+   · 452px 앱 카드에서는 130px 에서 상한 (데스크톱 과대 방지)
    · 제목 23.5 → 20.5px, 부제 13 → 12px 로 한 단계 낮춰 초상을 주인공으로
    ══════════════════════════════════════════════════════════════════ */
-.hero-show{--hs-s:min(calc((100vw - 30px)/3.24),124px)}
+.hero-show{--hs-s:min(calc((100vw - 30px)/3.24),130px)}
 .hs-stage{margin:0 -12px;height:calc(var(--hs-s) + 22px)}
 .hs-chars{width:100%;gap:0}
 .hs-av{width:calc(var(--hs-s)*.82);height:calc(var(--hs-s)*.82)}
@@ -1305,6 +1305,41 @@ table.rt td:first-child{font-weight:600;color:var(--ink-1);white-space:nowrap}
 @media (max-width:359px){
   .hs-title{font-size:19.5px}
   .hs-sub{font-size:11.5px}
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   v10.3 — 히어로 초상 숨쉬기 · 금빛 후광 모션 (2026-11-23)
+   · 아주 느리고 작은 호흡 — scale 1 → 1.035, 위로 2px (3.6~4.4초 주기)
+   · 4명이 서로 다른 주기·시작점이라 같은 박자로 움직이지 않음
+   · 금박 테두리 바깥 후광(box-shadow)이 호흡과 같은 주기로 은은하게 감돎
+   · prefers-reduced-motion: reduce 에서 전부 정지
+   ══════════════════════════════════════════════════════════════════ */
+@keyframes hsBreatheC{0%,100%{transform:translateY(0) scale(1)}
+                     50%{transform:translateY(-2px) scale(1.035)}}
+@keyframes hsBreatheS{0%,100%{transform:translateY(7px) scale(.9)}
+                     50%{transform:translateY(5px) scale(.9315)}}
+@keyframes hsGlowSoft{
+  0%,100%{box-shadow:0 0 0 3px rgba(9,10,14,.92),0 0 16px rgba(226,186,110,.44),0 12px 22px rgba(0,0,0,.62)}
+  50%    {box-shadow:0 0 0 3px rgba(9,10,14,.92),0 0 20px rgba(244,212,146,.66),0 12px 22px rgba(0,0,0,.62)}}
+@keyframes hsGlowMid{
+  0%,100%{box-shadow:0 0 0 3px rgba(9,10,14,.92),0 0 26px rgba(240,205,132,.58),0 14px 26px rgba(0,0,0,.68)}
+  50%    {box-shadow:0 0 0 3px rgba(9,10,14,.92),0 0 32px rgba(246,216,150,.78),0 14px 26px rgba(0,0,0,.68)}}
+@keyframes hsGlowHigh{
+  0%,100%{box-shadow:0 0 0 3px rgba(9,10,14,.92),0 0 30px rgba(240,205,132,.62),0 14px 26px rgba(0,0,0,.70)}
+  50%    {box-shadow:0 0 0 3px rgba(9,10,14,.92),0 0 36px rgba(246,216,150,.82),0 14px 26px rgba(0,0,0,.70)}}
+@keyframes hsHaloBreath{0%,100%{opacity:.72}50%{opacity:1}}
+.hs-av{animation:hsBreatheC 4.2s ease-in-out infinite,hsGlowSoft 4.2s ease-in-out infinite;
+  transform-origin:50% 50%;backface-visibility:hidden}
+.hs-av.a1{animation-name:hsBreatheS,hsGlowSoft;animation-duration:4.4s,4.4s;animation-delay:-.7s,-.7s}
+.hs-av.a2{animation-name:hsBreatheC,hsGlowMid;animation-duration:3.8s,3.8s;animation-delay:-2.1s,-2.1s}
+.hs-av.a3{animation-name:hsBreatheC,hsGlowHigh;animation-duration:4.0s,4.0s;animation-delay:-1.3s,-1.3s}
+.hs-av.a4{animation-name:hsBreatheS,hsGlowSoft;animation-duration:3.6s,3.6s;animation-delay:-2.6s,-2.6s}
+.hs-halo{animation:hsHaloBreath 5.6s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){
+  .hs-av,.hs-halo{animation:none!important}
+  .hs-av.a1,.hs-av.a4{transform:translateY(7px) scale(.9)}
+  .hs-av.a2,.hs-av.a3{transform:none}
+  .hs-halo{opacity:.9}
 }
 </style>
 <!-- Google tag (gtag.js) -->
