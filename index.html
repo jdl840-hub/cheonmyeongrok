@@ -1425,13 +1425,7 @@ table.rt td:first-child{font-weight:600;color:var(--ink-1);white-space:nowrap}
    v10.6 · 히어로 무료 안내 (노란 CTA 대신 큰 안내 문구)
    ══════════════════════════════════════════════════════════════ */
 .hs-free{position:relative;z-index:2;margin-top:20px;text-align:center}
-.hf-rule{display:flex;align-items:center;justify-content:center;gap:9px;margin-bottom:12px}
-.hf-rule i{display:block;width:44px;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(212,175,106,.55))}
-.hf-rule i:last-child{background:linear-gradient(90deg,rgba(212,175,106,.55),transparent)}
-.hf-rule em{font-style:normal;font-size:10px;font-weight:700;letter-spacing:.22em;color:#F0DCAE;
-  padding:2px 8px;border-radius:20px;border:1px solid rgba(212,175,106,.42);
-  background:rgba(212,175,106,.10)}
+/* v10.7 · '결제 없이' 알약 배지(.hf-rule)는 제거됨 */
 .hs-free p{font-family:var(--serif);font-size:16.5px;line-height:1.62;font-weight:600;
   letter-spacing:-.01em;color:#F3E7CC;text-shadow:0 1px 10px rgba(0,0,0,.5)}
 .hs-free b{font-weight:800;color:#FFF3D6;
@@ -1635,6 +1629,42 @@ table.rt td:first-child{font-weight:600;color:var(--ink-1);white-space:nowrap}
 #paywall .sheet{padding-bottom:calc(14px + env(safe-area-inset-bottom))}
 #paywall .code-go{margin-top:6px}
 
+/* ══════════════════════════════════════════════════════════════
+   v10.7 · 홈 상단 압축 (2026-11-24)
+   · 히어로 제목 「네 명의 도사가 내 사주를 펼쳐 봅니다」 한 줄 (360~430px 줄바꿈 없음)
+   · '결제 없이' 알약 배지와 좌우 구분선 제거 (HTML 에서 삭제)
+   · 무료 안내 문구 16.5px → 13.5px
+   · 히어로 상하 패딩·간격 축소 → 분야 선택 바·대형 카드를 위로 당김
+   ══════════════════════════════════════════════════════════════ */
+.home-head{padding:12px 20px 0}
+.hero-show{margin-top:10px;padding:10px 20px 12px}
+.hs-stage{height:calc(var(--hs-s) + 10px)}
+.hs-title{font-size:clamp(17px,4.85vw,20px);line-height:1.28;margin-top:8px;
+  letter-spacing:-.015em;white-space:nowrap}
+.hs-title em{font-size:1em}
+.hs-sub{font-size:11.5px;line-height:1.52;margin-top:6px}
+.hs-free{margin-top:10px}
+.hs-free p{font-size:13.5px;line-height:1.5;font-weight:600;letter-spacing:-.005em}
+.hero-rule{margin:12px 0 8px}
+.hero-rule span{font-size:10.5px;letter-spacing:.24em}
+.catbar{padding:11px 20px 10px}
+.home-main{padding-top:6px}
+
+/* ══════════════════════════════════════════════════════════════
+   v10.8 · 메인 카드 여백 미세 조정 (2026-11-24)
+   · '궁금한 분야 고르기' 위 여백 12 → 26px : 히어로와 살짝 떼어 냄
+   · 카드 상단 텍스트 구역 압축 : 제목 1줄 + 패딩·간격·버튼 높이 축소
+     → 390×844 첫 화면 아래쪽에 캐릭터 눈·미소까지 보이도록
+   ══════════════════════════════════════════════════════════════ */
+.hero-rule{margin:26px 0 8px}
+#catbar{padding:10px 20px 9px}
+.home-main{padding-top:3px}
+.tcard .tc-body{padding:13px 14px 12px}
+.tcard.all .tc-badge{font-size:9.5px;letter-spacing:.02em;padding:2px 7px}
+.tc-q{font-size:clamp(18px,5vw,19.5px);line-height:1.28;margin-top:8px;letter-spacing:-.02em}
+.tc-sub{font-size:12px;line-height:1.45;margin-top:5px}
+.tc-who{font-size:11px;line-height:1.45;margin-top:9px;padding-top:8px}
+.tc-cta{min-height:44px;margin-top:11px;font-size:14px;border-radius:12px}
 
 </style>
 <!-- Google tag (gtag.js) -->
@@ -1671,10 +1701,9 @@ table.rt td:first-child{font-weight:600;color:var(--ink-1);white-space:nowrap}
             <span class="hs-av a4" data-char="hyunwoo"></span>
           </div>
         </div>
-        <h2 class="hs-title">네 명의 도사가<br><em>내 사주</em>를 펼쳐 봅니다</h2>
+        <h2 class="hs-title">네 명의 도사가 <em>내 사주</em>를 펼쳐 봅니다</h2>
         <p class="hs-sub">만세력 40년 큰스승부터 총명한 동자까지<br><b>5대 고전</b>의 눈으로 읽는 열 가지 운세</p>
         <div class="hs-free">
-          <span class="hf-rule" aria-hidden="true"><i></i><em>결제 없이</em><i></i></span>
           <p>이름과 생년월일을 넣으면<br><b>기본사주를 무료로</b> 보실 수 있습니다</p>
         </div>
       </div>
