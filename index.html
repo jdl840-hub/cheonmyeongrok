@@ -1281,6 +1281,31 @@ table.rt td:first-child{font-weight:600;color:var(--ink-1);white-space:nowrap}
 .pay-zone .pc-code{background:transparent;border:1px dashed rgba(212,175,106,.48);
   color:#EDD9A9;font-size:14px;font-weight:600;padding:14px;margin-top:12px}
 .pay-zone .pc-note{font-size:12.5px;line-height:1.6;color:#9A9282;margin-top:12px}
+
+/* ══════════════════════════════════════════════════════════════════
+   v10.2 — 히어로 4인 초상 확대 · 제목/부제 비율 조정 (2026-11-23)
+   · 초상 4개 합계 = 3.24 × 기준크기(겹침 16.5%씩) → 360~430px 폭을 가로로 채움
+   · 452px 앱 카드에서는 124px 에서 상한 (데스크톱 과대 방지)
+   · 제목 23.5 → 20.5px, 부제 13 → 12px 로 한 단계 낮춰 초상을 주인공으로
+   ══════════════════════════════════════════════════════════════════ */
+.hero-show{--hs-s:min(calc((100vw - 30px)/3.24),124px)}
+.hs-stage{margin:0 -12px;height:calc(var(--hs-s) + 22px)}
+.hs-chars{width:100%;gap:0}
+.hs-av{width:calc(var(--hs-s)*.82);height:calc(var(--hs-s)*.82)}
+.hs-av.a1{margin-right:calc(var(--hs-s)*-.165)}
+.hs-av.a2{width:calc(var(--hs-s)*.93);height:calc(var(--hs-s)*.93);margin-right:calc(var(--hs-s)*-.165)}
+.hs-av.a3{width:var(--hs-s);height:var(--hs-s)}
+.hs-av.a4{width:calc(var(--hs-s)*.82);height:calc(var(--hs-s)*.82)}
+/* 광원·바닥 반사광도 초상에 맞춰 함께 확대 */
+.hs-halo{width:calc(var(--hs-s)*2.05);height:calc(var(--hs-s)*2.05)}
+.hs-stage::after{width:calc(var(--hs-s)*2.1);height:26px;bottom:2px}
+/* 제목·부제는 한 단계 작게 */
+.hs-title{font-size:20.5px;line-height:1.44;margin-top:12px}
+.hs-sub{font-size:12px;line-height:1.62;margin-top:7px}
+@media (max-width:359px){
+  .hs-title{font-size:19.5px}
+  .hs-sub{font-size:11.5px}
+}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DY4E4FBVYW"></script>
