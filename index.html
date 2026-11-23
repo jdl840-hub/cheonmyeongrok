@@ -1155,6 +1155,132 @@ table.rt td:first-child{font-weight:600;color:var(--ink-1);white-space:nowrap}
 #scr-input .card{padding:22px 18px 20px}
 #scr-input .field{margin-bottom:22px}
 #scr-input .fine{line-height:1.75;margin-top:14px}
+
+/* ══════════════════════════════════════════════════════════════════
+   v10.1 — 무료 풀이 본문 확대 · 무료/유료 경계 분리 (2026-11-23)
+   · 무료 본문 18px / line-height 1.85, 보조 라벨도 12.5~15px로 상향
+   · 무료 풀이 끝 = 금박 전환 밴드, 유료 상세보기 = 흑요석×금박 카드
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 무료 본문: 크게, 진하게 ─────────────────────────────────────── */
+.free-p p{font-size:18px;line-height:1.85;color:#241C10;margin-bottom:15px;letter-spacing:-.01em}
+.free-p b{color:#6B4E14;font-weight:700}
+.lc-free p{font-size:18px;line-height:1.85;color:#2B2418;margin-bottom:15px;letter-spacing:-.01em}
+.lc-free b{color:#6B4E14;font-weight:700}
+.lc-lead{font-size:18px;line-height:1.86;color:#241C10;letter-spacing:-.01em}
+.lc-body{font-size:17px;line-height:1.86;color:#2B2418}
+.sum-box p{font-size:18.5px;line-height:1.85;color:#241C10}
+.free-hint p{font-size:16px;line-height:1.75;color:#2B2418}
+.free-hint .fh-k{font-size:12.5px;letter-spacing:.16em}
+.free-fine{font-size:13.5px;line-height:1.7;color:#5E5645}
+
+/* 무료 카드 머리 · 작은 라벨도 읽히게 */
+.free-badge{font-size:12.5px;letter-spacing:.10em;padding:5px 11px}
+.free-score b{font-size:38px}
+.free-score span{font-size:14px;color:#5E5645}
+.free-score em{font-size:12.5px;color:#7A5A18}
+.lc-tip{font-size:16px;line-height:1.74;color:#4F3D12}
+.lc-tip span{font-size:12px;padding:3px 8px}
+.lc-role{font-size:12px;padding:3px 9px}
+.ltab b{font-size:14.5px}
+.ltab span{font-size:12px}
+.gm-tx b{font-size:14.5px}
+.gm-tx em{font-size:12.5px;line-height:1.5;color:#5E5645}
+.all-free-h span{font-size:15.5px}
+.all-free-h em{font-size:12px}
+.ten-ov-h span{font-size:15.5px}
+.ten-ov-h em{font-size:12px}
+.to-tx b{font-size:15.5px}
+.to-tx em{font-size:12.5px;color:#5E5645}
+.to-sc{font-size:15px}
+.d-eyebrow{font-size:12px}
+.d-oneline{font-size:16.5px;line-height:1.7}
+.vip-note,.v9-sum .vip-note{font-size:13px;line-height:1.6;color:#9C9384}
+.rc-line{font-size:14px;line-height:1.65;color:#CFC8B8}
+
+/* ── 무료 풀이 끝 → 금박 전환 밴드 ──────────────────────────────── */
+.free-end{margin:40px 0 30px;padding:0 16px}
+.fe-rule{display:flex;align-items:center;gap:12px}
+.fe-rule i{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(160,126,62,.55),transparent)}
+.fe-rule span{font-size:12px;letter-spacing:.2em;color:#7A5A18;white-space:nowrap}
+.fe-band{position:relative;margin-top:13px;padding:24px 20px 20px;border-radius:16px;text-align:center;
+  background:linear-gradient(162deg,#F8EBCC 0%,#EAD39C 44%,#D6B471 100%);
+  border:1px solid #B8912F;
+  box-shadow:0 16px 32px rgba(120,92,30,.22),inset 0 1px 0 rgba(255,255,255,.62)}
+.fe-band::before{content:'';position:absolute;inset:5px;border:1px solid rgba(90,66,18,.22);
+  border-radius:12px;pointer-events:none}
+.fe-band::after{content:'';position:absolute;left:0;right:0;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent);pointer-events:none}
+.fe-k{position:relative;display:inline-block;font-size:11.5px;letter-spacing:.26em;color:#4A340A;
+  background:rgba(255,253,245,.62);border:1px solid rgba(90,66,18,.26);border-radius:20px;padding:4px 11px}
+.fe-band h3{position:relative;margin-top:11px;font-family:var(--serif);font-size:25px;font-weight:700;
+  color:#231903;letter-spacing:-.01em;line-height:1.25}
+.fe-band p{position:relative;margin-top:8px;font-size:15.5px;line-height:1.6;color:#3A2A08}
+.fe-band p b{color:#1E1503;font-weight:700}
+.fe-down{position:relative;display:block;margin-top:13px;padding-top:12px;
+  border-top:1px dashed rgba(90,66,18,.32);font-size:13px;color:#4A340A}
+
+/* ── 유료 상세보기: 묵직한 흑요석 × 금박 결제 카드 ─────────────── */
+.pay-zone{margin:0 16px;padding:24px 16px 20px;border-radius:20px;overflow:hidden;position:relative;
+  background:linear-gradient(168deg,#1E2230 0%,#151824 44%,#0C0E14 100%);
+  border:1px solid rgba(212,175,106,.48);
+  box-shadow:0 26px 50px rgba(18,14,4,.34),inset 0 1px 0 rgba(255,255,255,.07)}
+.pay-zone::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 66% at 50% -6%,rgba(212,175,106,.24),transparent 62%)}
+.pay-zone::after{content:'';position:absolute;left:18px;right:18px;top:0;height:2px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,#F6E4B8,#D4AF6A,transparent);opacity:.8}
+.pay-zone > *{position:relative;z-index:1}
+.pay-zone .pz-head{padding:2px 2px 0}
+.pay-zone .pz-k{font-size:11.5px;letter-spacing:.22em;color:#E2C489}
+.pay-zone .pz-head h3{font-family:var(--serif);font-size:22px;font-weight:600;color:#F6EBCF;
+  margin-top:10px;line-height:1.34;letter-spacing:-.01em}
+.pay-zone .pz-head p{margin-top:9px;font-size:14px;line-height:1.68;color:#B4AB97}
+
+/* 핵심 혜택 3줄 */
+.pz-benefits{list-style:none;display:grid;gap:9px;margin:17px 0 0;padding:15px 15px 15px 14px;
+  border-radius:13px;background:rgba(212,175,106,.08);border:1px solid rgba(212,175,106,.24)}
+.pz-benefits li{position:relative;padding-left:20px;font-size:15px;line-height:1.5;color:#DBD3C1}
+.pz-benefits li b{color:#F2D48C;font-weight:700}
+.pz-benefits li::before{content:'';position:absolute;left:2px;top:8px;width:7px;height:7px;border-radius:2px;
+  transform:rotate(45deg);background:linear-gradient(180deg,#F6E6BE,#CFA758)}
+
+/* 잠금 미리보기 — 어두운 카드 안 유리창 */
+.pay-zone .lock-wrap{margin-top:18px;border-radius:14px;overflow:hidden;
+  border:1px solid rgba(212,175,106,.20);background:rgba(255,255,255,.03)}
+.pay-zone .lock-wrap .blur-zone{padding:14px 15px 2px;max-height:150px;opacity:.60;filter:blur(4.5px);
+  background:linear-gradient(180deg,#FBF5E7,#F0E5CE)}
+.pay-zone .lock-veil{background:linear-gradient(180deg,rgba(20,23,33,0) 0%,rgba(20,23,33,.88) 42%,#151824 74%)}
+.pay-zone .lock-ico2{background:rgba(212,175,106,.14);border:1px solid rgba(212,175,106,.48);color:#F2D48C}
+.pay-zone .lock-in h4{font-family:var(--serif);font-size:16.5px;line-height:1.5;color:#F2E6C8}
+.pay-zone .lock-in p{font-size:13px;line-height:1.6;color:#A9A08D;margin-top:7px}
+.pay-zone .lock-chips span{font-size:11.5px;color:#E3CD9B;background:rgba(212,175,106,.10);
+  border:1px solid rgba(212,175,106,.32);padding:5px 10px}
+
+/* 가격 버튼 — 어두운 카드 위 고대비 */
+.pay-zone .pc-opts{margin-top:18px;gap:9px}
+.pay-zone .pc-opt{min-height:72px;padding:14px 13px;border-radius:13px;
+  background:rgba(255,255,255,.055);border:1px solid rgba(212,175,106,.28);
+  box-shadow:none;color:#F1EDE4}
+.pay-zone .pc-opt .po-ico{font-size:20px}
+.pay-zone .pc-opt .po-tx b{font-size:15.5px;line-height:1.35;color:#F6F1E3;font-weight:700}
+.pay-zone .pc-opt .po-tx small{font-size:12.5px;color:#A9A08D;margin-top:4px}
+.pay-zone .pc-opt .po-pr{font-family:var(--serif);font-size:19px;color:#F7DFA4}
+.pay-zone .pc-opt.hot{border-color:#F6E7BE;
+  background:linear-gradient(162deg,#F8EBC6 0%,#E3C482 46%,#CB9F51 100%);
+  box-shadow:0 12px 26px rgba(88,64,14,.45),inset 0 1px 0 rgba(255,255,255,.55)}
+.pay-zone .pc-opt.hot .po-ico{color:#2A1F07}
+.pay-zone .pc-opt.hot .po-tx b{color:#221905}
+.pay-zone .pc-opt.hot .po-tx small{color:#46340F}
+.pay-zone .pc-opt.hot{flex-wrap:wrap;align-items:flex-start}
+.pay-zone .pc-opt.hot .po-tx{flex:1 1 auto}
+.pay-zone .pc-opt.hot .po-pr{color:#221905;font-size:23px;flex:1 1 100%;text-align:right;
+  margin-top:9px;padding-top:9px;border-top:1px solid rgba(60,42,8,.22);letter-spacing:-.01em}
+.pay-zone .pc-opt.hot::after{content:'추천';color:#241A06;background:#FFF8E4;
+  border:1px solid rgba(74,52,10,.32);border-radius:20px;padding:2px 9px;font-size:10px;
+  box-shadow:0 2px 6px rgba(30,20,0,.28)}
+.pay-zone .pc-code{background:transparent;border:1px dashed rgba(212,175,106,.48);
+  color:#EDD9A9;font-size:14px;font-weight:600;padding:14px;margin-top:12px}
+.pay-zone .pc-note{font-size:12.5px;line-height:1.6;color:#9A9282;margin-top:12px}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DY4E4FBVYW"></script>
@@ -5146,7 +5272,6 @@ window.CHAR_IMG = {"yeonhal": "data:image/webp;base64,UklGRraKAABXRUJQVlA4IKqKAA
         <span class="fh-k">2026 ~ 2027 핵심 힌트</span>
         <p>${yearHint(a)}</p>
       </div>
-      <p class="free-fine">여기까지가 무료예요. 아래에서 5대 고전으로 본 시기별 전략까지 이어집니다.</p>
     </article>`;
   }
 
@@ -5221,6 +5346,16 @@ window.CHAR_IMG = {"yeonhal": "data:image/webp;base64,UklGRraKAABXRUJQVlA4IKqKAA
     <button class="pc-code" type="button" data-codewave>확인 코드가 있어요 — 코드로 열기</button>
     <p class="pc-note">계좌이체(무통장 입금) · 오픈채팅 확인 후 코드로 열람</p>`;
   }
+  function freeEndHTML() {
+    const inAll = state.mode === 'all';
+    return `<div class="free-end">
+      <div class="fe-band">
+        <h3>여기까지 무료 풀이</h3>
+        <p>이어지는 ${inAll ? '<b>10종 전체 상세보기</b> · <b>15장 인생지도</b>' : '<b>세부 풀이</b> · <b>15장 인생지도</b>'}</p>
+        <span class="fe-down">아래 유료 상세보기에서 바로 열 수 있어요 ⌄</span>
+      </div>
+    </div>`;
+  }
   function payZoneHTML(a) {
     const inAll = state.mode === 'all';
     const t = inAll ? ALL_ITEM : (Con.THEMES[state.focus] || EMPTY_FALLBACK);
@@ -5228,10 +5363,15 @@ window.CHAR_IMG = {"yeonhal": "data:image/webp;base64,UklGRraKAABXRUJQVlA4IKqKAA
     const blur = blocks.slice(1, 3);
     return `<section class="pay-zone" id="pay-zone">
       <div class="pz-head">
-        <span class="pz-k">${inAll ? '더 깊이 보기' : '세부 풀이 미리보기'}</span>
-        <h3>${inAll ? '10종 전체와 15장 인생지도' : t.name + ', 여기서부터'}</h3>
+        <span class="pz-k">유료 상세보기 · 이어지는 이야기</span>
+        <h3>지금 막힌 뒷이야기,<br>상세보기로 바로 열어보세요</h3>
         <p>${inAll ? '열 가지 운세 전체와 90세까지의 15장 지도가 이 안에 있습니다.' : t.name + ' 세부 풀이 · 5대 고전 시기별 전략 · 주의할 해 · 실천법'}</p>
       </div>
+      <ul class="pz-benefits">
+        <li><b>5대 고전</b>으로 같은 사주를 다섯 눈으로 겹쳐 읽기</li>
+        <li><b>시기별 전략</b>·주의할 해·지금 바로 할 일</li>
+        <li><b>15장 인생지도</b> — 90세까지 이어지는 흐름</li>
+      </ul>
       <div class="lock-wrap">
         <div class="blur-zone">${blocksHTML(blur)}</div>
         <div class="lock-veil"><div class="lock-in">
@@ -5402,7 +5542,7 @@ window.CHAR_IMG = {"yeonhal": "data:image/webp;base64,UklGRraKAABXRUJQVlA4IKqKAA
       body += inAll ? allPaidHTML(a) : themePaidHTML(a);
       if (state.pass && !inAll) body += deepHTML(a) + allThemesHTML(a);
     } else {
-      body += '<div class="sec-div"><i></i><span>여기서부터 세부 풀이</span><i></i></div>';
+      body += freeEndHTML();
       body += payZoneHTML(a);
     }
     if (!state.pass) {
