@@ -4471,12 +4471,14 @@ window.CHAR_IMG = {"yeonhal": "data:image/webp;base64,UklGRnYTAABXRUJQVlA4IGoTAA
   const BADGE_EMOJI = b => b === 'g' ? '🟢' : b === 'r' ? '🔴' : '🟡';
   const calLabel = c => c === 'solar' ? '양력' : c === 'lunarLeap' ? '음력(윤달)' : '음력';
 
-  /* ── 내 정보 저장 ───────────────────────────────────────── */
+  /* ── 내 정보 저장 (자동 저장 OFF · 항상 빈칸에서 시작) ────── */
   function saveProfile(input) {
-    try { localStorage.setItem(PROFILE_KEY, JSON.stringify(input)); } catch (e) {}
+    /* 저장하지 않음. 예전 버전이 남긴 흔적이 있으면 함께 지운다. */
+    try { localStorage.removeItem(PROFILE_KEY); } catch (e) {}
   }
   function loadProfile() {
-    try { const raw = localStorage.getItem(PROFILE_KEY); if (raw) { const p = JSON.parse(raw); if (p && p.y && p.m && p.d) return p; } } catch (e) {}
+    /* 불러오지 않음. 폰에 이미 남아 있던 저장 정보도 접속 시 바로 지운다. */
+    try { localStorage.removeItem(PROFILE_KEY); } catch (e) {}
     return null;
   }
   function clearProfile() { try { localStorage.removeItem(PROFILE_KEY); } catch (e) {} }
@@ -4526,7 +4528,7 @@ window.CHAR_IMG = {"yeonhal": "data:image/webp;base64,UklGRnYTAABXRUJQVlA4IGoTAA
     else { state.mode = 'theme'; state.focus = k; }
     if (state.mode === 'theme') { store.themeViews = store.themeViews || {}; store.themeViews[k] = (store.themeViews[k] || 0) + 1; saveStore(); }
     const p = loadProfile();
-    if (p) runWith(p); else openInput();
+    if (p) runWith(p); else { resetForm({ quiet: true }); openInput(); }
   }
   function runWith(p) {
     const input = {
@@ -4615,7 +4617,8 @@ window.CHAR_IMG = {"yeonhal": "data:image/webp;base64,UklGRnYTAABXRUJQVlA4IGoTAA
     $('#f-hour').value = (p.hour === null || p.hour === undefined) ? 'none' : String(p.hour);
     updateDateHint();
   }
-  function resetForm() {
+  function resetForm(opts) {
+    const quiet = !!(opts && opts.quiet);
     $('#f-name').value = '';
     $('#f-phone').value = '';
     $('#f-consent').checked = false;
@@ -4626,7 +4629,9 @@ window.CHAR_IMG = {"yeonhal": "data:image/webp;base64,UklGRnYTAABXRUJQVlA4IGoTAA
     $$('#f-cal button').forEach(b => b.classList.toggle('on', b.dataset.v === 'solar'));
     ['f-name', 'f-birth', 'f-hour'].forEach(k => setFieldError(k, false));
     clearProfile();
+    if (typeof renderSavedStrip === 'function') renderSavedStrip();
     updateDateHint();
+    if (quiet) return;
     toast('입력값을 모두 지웠어요.');
     try { $('#f-name').focus(); } catch (e) {}
   }
