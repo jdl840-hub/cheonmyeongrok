@@ -1666,6 +1666,73 @@ table.rt td:first-child{font-weight:600;color:var(--ink-1);white-space:nowrap}
 .tc-who{font-size:11px;line-height:1.45;margin-top:9px;padding-top:8px}
 .tc-cta{min-height:44px;margin-top:11px;font-size:14px;border-radius:12px}
 
+/* ══════════════════════════════════════════════════════════════
+   v10.9 · 무료 결과 하단 결제 UI 1개로 통합 (2026-11-24)
+   · 금박 전환 밴드 + 흑요석 결제 카드(블러·혜택·칩) + 15장 하단 검은
+     중복 박스 → 금박 카드 '여기까지 무료 풀이' 1개로 통합
+     (요금 3단 · 코드로 열기 · 계좌이체 3단계만 한 번)
+   · 15장 인생 지도 잠금 목록은 누르면 결제 선택이 열리는 버튼
+   ══════════════════════════════════════════════════════════════ */
+.upay{margin:26px 16px 0;padding:24px 16px 18px;border-radius:18px;position:relative;overflow:hidden;
+  background:linear-gradient(164deg,#FBF2DC 0%,#F2E1BB 46%,#E4CB96 100%);
+  border:1px solid #C0A067;
+  box-shadow:0 18px 34px rgba(120,92,30,.20),inset 0 1px 0 rgba(255,255,255,.70)}
+.upay::before{content:'';position:absolute;inset:5px;border:1px solid rgba(90,66,18,.20);
+  border-radius:14px;pointer-events:none}
+.upay::after{content:'';position:absolute;left:0;right:0;top:0;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent)}
+.upay > *{position:relative;z-index:1}
+.up-k{display:block;text-align:center;font-size:11px;letter-spacing:.24em;color:#4A340A}
+.upay h3{margin-top:8px;text-align:center;font-family:var(--serif);font-size:24px;font-weight:700;
+  color:#231903;letter-spacing:-.01em;line-height:1.25}
+.up-lead{margin-top:9px;text-align:center;font-size:14.5px;line-height:1.62;color:#2C2004;
+  font-weight:600;letter-spacing:-.01em;word-break:keep-all}
+.up-lead b{color:#1E1503;font-weight:800;
+  background:linear-gradient(180deg,transparent 60%,rgba(226,184,84,.45) 60%);padding:0 1px}
+.up-sub{margin-top:5px;text-align:center;font-size:11.5px;line-height:1.5;color:#7A5F1E;
+  letter-spacing:.01em;word-break:keep-all}
+.up-tiers{display:grid;gap:8px;margin-top:16px}
+.up-tier{appearance:none;display:flex;align-items:flex-start;gap:9px;width:100%;text-align:left;cursor:pointer;
+  border:1px solid #D9C298;background:rgba(255,253,247,.95);border-radius:12px;padding:12px 13px;
+  min-height:64px;box-shadow:0 1px 2px rgba(94,78,44,.08)}
+.up-tier:active{transform:translateY(1px)}
+.up-tier .ut-ico{font-size:17px;flex:0 0 auto;line-height:1.3;margin-top:1px}
+.up-tier .ut-tx{flex:1;min-width:0}
+.up-tier .ut-l1{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.up-tier .ut-l1 b{flex:1 1 auto;min-width:0;font-size:14.5px;font-weight:700;color:var(--ink-1);line-height:1.38}
+.up-tier .ut-pr{flex:0 0 auto;font-family:var(--serif);font-size:16px;font-weight:700;color:#6E4E12;
+  line-height:1.38;white-space:nowrap}
+.up-tier .ut-tx small{display:block;font-size:11.5px;color:var(--ink-3);margin-top:3px;line-height:1.42}
+.up-tier.hot{border-color:#B8912F;background:linear-gradient(150deg,#2C261A,#17140F);
+  box-shadow:0 8px 18px rgba(58,42,10,.26)}
+.up-tier.hot .ut-l1 b{color:#F6E6BE}
+.up-tier.hot .ut-tx small{color:#D6C39A}
+.up-tier.hot .ut-pr{color:#F2D48C}
+.up-code{appearance:none;display:flex;align-items:center;justify-content:center;width:100%;margin-top:10px;
+  background:rgba(255,253,247,.72);border:1px dashed #B79A63;border-radius:11px;padding:12px;
+  font-family:inherit;font-size:13px;font-weight:600;color:#4A340A;cursor:pointer}
+.up-code:active{transform:translateY(1px)}
+.up-steps{margin-top:11px;padding:12px 12px 11px;border-radius:12px;
+  background:rgba(255,253,247,.60);border:1px solid rgba(90,66,18,.14)}
+.up-steps > span{display:flex;align-items:flex-start;gap:8px;font-size:11.5px;line-height:1.55;color:#3E2E08}
+.up-steps > span + span{margin-top:5px}
+.up-steps > span > span{display:block;flex:1 1 auto;min-width:0}
+.up-steps i{flex:0 0 auto;display:grid;place-items:center;width:15px;height:15px;margin-top:1px;
+  border-radius:50%;background:#8A6A1E;color:#FBF2DC;font-size:9.5px;font-style:normal;font-weight:700}
+.up-steps b{color:#1E1503;font-weight:700}
+/* 15장 인생 지도 — 잠금 줄은 누르면 결제 선택이 열린다 */
+.toc-mini .toc-row.tl{width:100%;appearance:none;background:none;border:0;border-bottom:1px solid #F0E7D5;
+  font-family:inherit;text-align:left;cursor:pointer}
+.toc-mini .toc-row.tl:last-child{border-bottom:0}
+.toc-mini .toc-row.tl:active{background:#FBF4E4}
+.dt-slim{appearance:none;display:flex;align-items:center;justify-content:center;gap:6px;
+  margin:12px 16px 0;width:calc(100% - 32px);padding:12px 10px;border-radius:11px;
+  border:1px solid #DCC79C;background:#FFFDF7;font-family:inherit;
+  font-size:12.5px;font-weight:500;color:#6E4E12;cursor:pointer}
+.dt-slim b{font-weight:700}
+.dt-slim i{font-style:normal;color:#9A7B33}
+.dt-slim:active{transform:translateY(1px)}
+
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DY4E4FBVYW"></script>
@@ -5786,76 +5853,31 @@ window.CHAR_IMG = {"yeonhal": "data:image/webp;base64,UklGRrIaAwBXRUJQVlA4WAoAAA
   }
 
   /* ── 가격 · 잠금 ────────────────────────────────────────── */
-  function priceButtonsHTML() {
+  /* v10.9 · 무료 결과 하단 통합 결제 카드 (결제 유도는 이 카드 하나)
+     v10.11 · '여기까지 무료 풀이' 바로 아래에 안내 문구(더 자세한 내용을 보시려면
+     아래 유료 버튼을 클릭해 주세요)를 2줄 부제로 넣고, 이어지는 내용은 작은 한 줄로 정리 */
+  function unifiedPayHTML() {
     const inAll = state.mode === 'all';
-    const t = inAll ? ALL_ITEM : (Con.THEMES[state.focus] || EMPTY_FALLBACK);
-    return `<div class="pc-opts">
-      <button class="pc-opt" type="button" data-p="single">
-        <span class="po-ico">${inAll ? '🔎' : t.icon}</span>
-        <span class="po-tx"><b>${inAll ? '한 분야 세부내용 보기' : '이 분야 세부내용 보기'}</b><small>${inAll ? '원하는 분야 하나를 골라 세부 풀이 열람' : '5대 고전으로 본 세부 풀이 · 시기별 전략'}</small></span>
-        <span class="po-pr">4,900원</span>
-      </button>
-      <button class="pc-opt" type="button" data-p="pkg">
-        <span class="po-ico">🗂️</span>
-        <span class="po-tx"><b>${inAll ? '3가지 사주 세부내용 보기' : '이 분야를 포함해 3가지 사주 세부내용 보기'}</b><small>${inAll ? '원하는 3개 분야 세부 풀이' : '이 분야 + 원하는 2개 분야'}</small></span>
-        <span class="po-pr">9,900원</span>
-      </button>
-      <button class="pc-opt hot" type="button" data-p="pass">
-        <span class="po-ico">🗝️</span>
-        <span class="po-tx"><b>10종 사주 전체 15장 보기</b><small>열 가지 운세 전체 + 90세까지의 인생지도</small></span>
-        <span class="po-pr">19,900원</span>
-      </button>
-    </div>
-    <button class="pc-code" type="button" data-codewave>확인 코드가 있어요 — 코드로 열기</button>
-    <p class="pc-note">계좌이체(무통장 입금) · 오픈채팅 확인 후 코드로 열람</p>
-    <div class="pay-mini">
-      <span><i>1</i><span>농협 <b>485810-52-120791</b> (예금주 임재대)로 입금</span></span>
-      <span><i>2</i><span>오픈채팅에 <b>입금자명·금액</b> 알리기</span></span>
-      <span><i>3</i><span>받은 <b>확인 코드</b>를 넣으면 바로 열람</span></span>
-    </div>`;
-  }
-  function freeEndHTML() {
-    const inAll = state.mode === 'all';
-    return `<div class="free-end">
-      <div class="fe-band">
-        <span class="fe-k">무료 풀이 끝</span>
-        <h3>여기까지 무료 풀이</h3>
-        <p>이어지는 ${inAll ? '<b>10종 전체 상세보기</b> · <b>15장 인생지도</b>' : '<b>세부 풀이</b> · <b>15장 인생지도</b>'}</p>
-        <p class="fe-msg">더 자세한 내용을 보고 싶으시면 아래 <b>유료 결제</b> 버튼을 눌러 더 자세한 사주를 확인하실 수 있습니다.</p>
-        <button class="fe-btn" type="button" data-paid-opt="free-end">
-          <span class="mk">유료 결제 · 더 자세한 사주 보기</span>
-          <span class="ms">4,900 · 9,900 · 19,900원 중 선택</span>
-        </button>
-        <span class="fe-down">계좌이체 후 확인 코드를 넣으면 바로 열려요</span>
+    return `<section class="upay" id="unified-pay">
+      <span class="up-k">유료 상세보기</span>
+      <h3>여기까지 무료 풀이</h3>
+      <p class="up-lead">더 자세한 내용을 보시려면<br>아래 <b>유료 버튼</b>을 클릭해 주세요</p>
+      <p class="up-sub">${inAll ? '10종 전체 세부 풀이' : '세부 풀이'} · 15장 인생지도가 이어져요</p>
+      <div class="up-tiers">
+        ${optRowsData(inAll).map(o => `<button class="up-tier${o.hot ? ' hot' : ''}" type="button" data-p="${o.k}">
+          <span class="ut-ico">${o.ico}</span>
+          <span class="ut-tx">
+            <span class="ut-l1"><b>${o.b}</b><span class="ut-pr">${o.p}</span></span>
+            <small>${o.s}</small>
+          </span>
+        </button>`).join('')}
       </div>
-    </div>`;
-  }
-  function payZoneHTML(a) {
-    const inAll = state.mode === 'all';
-    const t = inAll ? ALL_ITEM : (Con.THEMES[state.focus] || EMPTY_FALLBACK);
-    const blocks = C8.fortuneDetail(a, inAll ? 'wealth' : state.focus, partner());
-    const blur = blocks.slice(1, 3);
-    return `<section class="pay-zone" id="pay-zone">
-      <div class="pz-head">
-        <span class="pz-k">유료 상세보기 · 이어지는 이야기</span>
-        <h3>지금 막힌 뒷이야기,<br>상세보기로 바로 열어보세요</h3>
-        <p>${inAll ? '열 가지 운세 전체와 90세까지의 15장 지도가 이 안에 있습니다.' : t.name + ' 세부 풀이 · 5대 고전 시기별 전략 · 주의할 해 · 실천법'}</p>
+      <button class="up-code" type="button" data-codewave>확인 코드가 있어요 — 코드로 열기</button>
+      <div class="up-steps">
+        <span><i>1</i><span>농협 <b>485810-52-120791</b> (예금주 임재대)로 입금</span></span>
+        <span><i>2</i><span>오픈채팅에 <b>입금자명·금액</b> 알리기</span></span>
+        <span><i>3</i><span>받은 <b>확인 코드</b>를 넣으면 바로 열람</span></span>
       </div>
-      <ul class="pz-benefits">
-        <li><b>5대 고전</b>으로 같은 사주를 다섯 눈으로 겹쳐 읽기</li>
-        <li><b>시기별 전략</b>·주의할 해·지금 바로 할 일</li>
-        <li><b>15장 인생지도</b> — 90세까지 이어지는 흐름</li>
-      </ul>
-      <div class="lock-wrap">
-        <div class="blur-zone">${blocksHTML(blur)}</div>
-        <div class="lock-veil"><div class="lock-in">
-          <div class="lock-ico2">${LOCK_SVG}</div>
-          <h4>세부 풀이를 열면 5대 고전으로 본 시기별 전략·주의할 해·실천법이 열려요</h4>
-          <p>쉽게 &#183; 정확하게. 한 번 열면 계속 보실 수 있어요.</p>
-          <div class="lock-chips"><span>5대 고전</span><span>시기별 전략</span><span>주의할 해</span><span>실천법</span></div>
-        </div></div>
-      </div>
-      ${priceButtonsHTML()}
     </section>`;
   }
 
@@ -5953,7 +5975,7 @@ window.CHAR_IMG = {"yeonhal": "data:image/webp;base64,UklGRrIaAwBXRUJQVlA4WAoAAA
       { no: '08', q: '돈과 일은 언제 풀릴까?', t: '지금의 10년 흐름' },
       { no: '11', q: '2026~2027년 꼭 피해야 할 것', t: '2026년 · 2027년 자세히' }
     ];
-    return `<div class="toc toc-mini">${PREV.map(p => `<div class="toc-row"><span>${p.no}</span><b>${p.q}</b><i>${LOCK_SVG}</i></div>`).join('')}</div>`;
+    return `<div class="toc toc-mini">${PREV.map(p => `<button type="button" class="toc-row tl" data-lock="${p.no}"><span>${p.no}</span><b>${p.q}</b><i>${LOCK_SVG}</i></button>`).join('')}</div>`;
   }
 
   /* ── 블록 · 표 ─────────────────────────────────────────── */
@@ -6115,12 +6137,14 @@ window.CHAR_IMG = {"yeonhal": "data:image/webp;base64,UklGRrIaAwBXRUJQVlA4WAoAAA
       body += inAll ? allPaidHTML(a) : themePaidHTML(a);
       if (state.pass && !inAll) body += deepHTML(a) + allThemesHTML(a);
     } else {
-      body += freeEndHTML();
-      body += payZoneHTML(a);
+      body += unifiedPayHTML();
     }
-    if (!state.pass) {
+    /* v10.10 — 무료 결과 화면 하단의 '15장 인생 지도' 미리보기/잠금/중복 결제 섹션 제거.
+       무료 상태에서는 통합 결제 카드(#unified-pay) 다음 바로 맺음말로 이어진다.
+       (한 분야·3종을 이미 연 사용자에게는 전체 패스 상향 동선으로 이 섹션을 그대로 둔다) */
+    if (!state.pass && unlocked) {
       body += `<div class="sec-div"><i></i><span>15장 인생 지도</span><i></i></div>`;
-      body += `<div class="deep-tease">${guideMiniHTML('wolha', '예리 할머니의 인생 지도', '90세까지 열다섯 장 — 미리보기')}<div class="deep-head"><span>15장 · 깊이 읽는 리포트</span><h3>인생 지도 미리보기</h3><p>전체 패스에 15장이 모두 들어 있습니다.</p></div>${deepTeaseHTML()}${deepCtaHTML()}</div>`;
+      body += `<div class="deep-tease">${guideMiniHTML('wolha', '예리 할머니의 인생 지도', '90세까지 열다섯 장 — 미리보기')}<div class="deep-head"><span>15장 · 깊이 읽는 리포트</span><h3>인생 지도 미리보기</h3><p>전체 패스에 15장이 모두 들어 있습니다.</p></div>${deepTeaseHTML()}${deepSlimHTML()}</div>`;
     }
     body += `<div class="sign">
         <p>사주는 정해진 답이 아니라,<br>어디로 걸어갈지 알려 주는 지도입니다.<br>오늘 한 걸음이면 충분합니다.</p>
@@ -6151,6 +6175,10 @@ window.CHAR_IMG = {"yeonhal": "data:image/webp;base64,UklGRrIaAwBXRUJQVlA4WAoAAA
     $$('[data-open-pass]').forEach(b => b.onclick = () => {
       track('paid_cta_click', { from: b.dataset.openPass || 'pass', mode: state.mode, kind: 'pass' });
       openPaywall('pass');
+    });
+    $$('[data-lock]').forEach(b => b.onclick = () => {
+      track('paid_cta_click', { from: 'life-map-' + b.dataset.lock, mode: state.mode, kind: 'options' });
+      openOptSheet('life-map');
     });
     $$('[data-codewave]').forEach(b => b.onclick = openCodeSheet);
     $$('[data-pick]').forEach(b => b.onclick = () => openPickSheet('pkg'));
@@ -6267,8 +6295,9 @@ window.CHAR_IMG = {"yeonhal": "data:image/webp;base64,UklGRrIaAwBXRUJQVlA4WAoAAA
         s: inAll ? '원하는 3개 분야 세부 풀이' : `${nm} + 원하는 2개 분야 세부 풀이`,
         p: won(PRICE.pkg) },
       { k: 'pass', ico: '🗝️', hot: true,
-        b: '10종 사주 전체 15장 보기',
-        s: '열 가지 운세 전체 + 90세까지의 15장 인생지도',
+        b: '10종 사주 전체 + 예리 할머니의 15장 인생지도',
+        s: '90세까지 짚어 주는 흐름 (예: 가장 힘든 때 · 돈과 일이 풀리는 시기 · 2026~2027년 꼭 피해야 할 것 등)',
+        sShort: '열 가지 운세 전체 + 90세까지의 15장 인생지도',
         p: won(PRICE.pass) }
     ];
   }
@@ -6283,7 +6312,7 @@ window.CHAR_IMG = {"yeonhal": "data:image/webp;base64,UklGRrIaAwBXRUJQVlA4WAoAAA
     if (list) {
       list.innerHTML = optRowsData(inAll).map(o => `<button class="pc-opt${o.hot ? ' hot' : ''}" type="button" data-opt="${o.k}">
         <span class="po-ico">${o.ico}</span>
-        <span class="po-tx"><b>${o.b}</b><small>${o.s}</small></span>
+        <span class="po-tx"><b>${o.b}</b><small>${o.sShort || o.s}</small></span>
         <span class="po-pr">${o.p}</span>
       </button>`).join('');
       $$('#opt-list [data-opt]').forEach(b => b.onclick = () => {
@@ -6297,17 +6326,10 @@ window.CHAR_IMG = {"yeonhal": "data:image/webp;base64,UklGRrIaAwBXRUJQVlA4WAoAAA
     sh.classList.add('on'); sh.setAttribute('aria-hidden', 'false');
   }
   function closeOptSheet() { const sh = $('#opt-sheet'); if (!sh) return; sh.classList.remove('on'); sh.setAttribute('aria-hidden', 'true'); }
-  function deepCtaHTML() {
-    return `<div class="deep-cta">
-      <span class="dc-k">잠긴 12장 · 전체 패스</span>
-      <h4>잠긴 12장까지, 전체 패스로 한 번에</h4>
-      <p>15장 인생지도와 열 가지 운세가 모두 들어 있어요. 이미 한 분야를 보셨어도 전체 패스로 넓혀서 다시 보실 수 있습니다.</p>
-      <button class="dc-btn" type="button" data-paid-opt="deep">
-        <span class="mk">유료로 15장 전체 보기</span>
-        <span class="ms">4,900 · 9,900 · 19,900원 중 선택</span>
-      </button>
-      <button class="dc-pass" type="button" data-open-pass>전체 패스 19,900원 바로 결제 →</button>
-    </div>`;
+  function deepSlimHTML() {
+    return `<button class="dt-slim" type="button" data-open-pass="life-map">
+      <b>잠긴 12장 전체</b> · 10종 전체 패스 19,900원 <i aria-hidden="true">→</i>
+    </button>`;
   }
 
   /* ══════════ 결제 · 코드 ══════════ */
@@ -6315,7 +6337,7 @@ window.CHAR_IMG = {"yeonhal": "data:image/webp;base64,UklGRrIaAwBXRUJQVlA4WAoAAA
   function payLabels(kind) {
     const inAll = state.mode === 'all';
     const t = inAll ? ALL_ITEM : (Con.THEMES[state.focus] || EMPTY_FALLBACK);
-    if (kind === 'pass') return { name: '10종 사주 전체 15장 보기', amount: PRICE.pass };
+    if (kind === 'pass') return { name: '10종 사주 전체 + 15장 인생지도', amount: PRICE.pass };
     if (kind === 'pkg') return { name: inAll ? '3가지 사주 세부내용 보기' : `${t.name}${josa(t.name, '을', '를')} 포함해 3가지 사주 세부내용 보기`, amount: PRICE.pkg };
     return { name: inAll ? '한 분야 세부내용 보기' : `${t.name} 세부내용 보기`, amount: PRICE.single };
   }
